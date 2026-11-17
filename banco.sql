@@ -18,15 +18,22 @@ email VARCHAR(150) NOT NULL,
 senha_hash VARCHAR(255) NOT NULL, -- HASH BCRYPT/ARGON2, nunca a senha 
 ativo BOOLEAN NOT NULL DEFAULT TRUE,
 tentativas_falhas TINYINT UNSIGNED NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  bloqueio_ate DATETIME NULL,
-  ultimo_login DATETIME NULL ,
-  criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  atualizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT pk_usuarios PRIMARY KEY (id_usuario),
-  CONSTRAINT uq_usuarios_email UNIQUE (email),
- CONSTRAINT fk_usuaros_perfis FOREIGN KEY (id_perfil)
-   REFERENCES perfis (id_perfil)
-   ON UPDATE CASCADE 
-   ON DELETE RESTRICT,
-   CONSTRAINT ck_usuarios_tentativas CHECK (tentativas_falhas <= 10)
-  ) ENGINE = InnoDB;
+ bloqueio_ate DATETIME NULL,
+ultimo_login DATETIME NULL ,
+ criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+atualizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CONSTRAINT pk_usuarios PRIMARY KEY (id_usuario),
+CONSTRAINT uq_usuarios_email UNIQUE (email),
+CONSTRAINT fk_usuaros_perfis FOREIGN KEY (id_perfil)
+REFERENCES perfis (id_perfil)
+ON UPDATE CASCADE 
+ON DELETE RESTRICT,
+CONSTRAINT ck_usuarios_tentativas CHECK (tentativas_falhas <= 10)
+) ENGINE = InnoDB;
+
+CREATE TABLE historico_login (
+id_historico BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+id_usuario INT UNSIGNED NULL, 
+email_digitado VARCHAR(150) NOT NULL,
+sucesso BOOLEAN NOT NULL, 
+ip_origem VARCHAR(45) NOT NULL,
