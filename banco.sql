@@ -24,3 +24,9 @@ tentativas_falhas TINYINT UNSIGNED NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   atualizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT pk_usuarios PRIMARY KEY (id_usuario),
   CONSTRAINT uq_usuarios_email UNIQUE (email),
+ CONSTRAINT fk_usuaros_perfis FOREIGN KEY (id_perfil)
+   REFERENCES perfis (id_perfil)
+   ON UPDATE CASCADE 
+   ON DELETE RESTRICT,
+   CONSTRAINT ck_usuarios_tentativas CHECK (tentativas_falhas <= 10)
+  ) ENGINE = InnoDB;
