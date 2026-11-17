@@ -1,4 +1,4 @@
-REATE TABLE auth_db
+CREATE TABLE auth_db
 DEFAULT CHARACTER SET utf8mb4 
 DEFAULT COLLATE utf8mb_unicode_ci;
 
