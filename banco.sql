@@ -37,3 +37,14 @@ id_usuario INT UNSIGNED NULL,
 email_digitado VARCHAR(150) NOT NULL,
 sucesso BOOLEAN NOT NULL, 
 ip_origem VARCHAR(45) NOT NULL,
+user_agent VARCHAR(255) NULL,
+data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT pk_historico_login PRIMARY KEY (id_historico),
+CONSTRAINT fk_historico_usuarios FOREIGN KEY (id_usuario)
+REFERENCES usuarios (id_usuario)
+ON DELETE SET NULL
+) ENGINE = innoDB;
+
+CREATE INDEX idx_historico_usuario_data
+ON hsitorico_login (id_usuario, data_hora);
+  
