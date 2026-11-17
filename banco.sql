@@ -2,3 +2,10 @@ REATE TABLE auth_db
 DEFAULT CHARACTER SET utf8mb4 
 DEFAULT COLLATE utf8mb_unicode_ci;
 
+CREATE TABLE perfis (
+id_perfil TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+nome      VARCHAR (30) NOT NULL,
+descricao  VARCHAR(150),
+CONSTRAINT pk_perfis PRIMARY KEY (id_perfil),
+CONSTRAINT uq_perfis_nome UNIQUE (nome)
+) ENGINE = INNOdb;
