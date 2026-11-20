@@ -35,6 +35,7 @@ SHOW TABLES;
 DESCRIBE usuario;
 SHOW CREATE TABLE usuario;
 INSERT INTO perfiL (nome, descricao) VALUES
+  
 ('admin', 'Acesso total'),
 ('usuario', 'Acesso comum');
 INSERT INTO usuario (id_perfil, nome, email, hash_senha) VALUES
